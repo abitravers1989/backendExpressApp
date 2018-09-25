@@ -9,4 +9,5 @@ Response methods to end/ close / return the callback:
 https://expressjs.com/en/guide/routing.html#response-methods
 
 1. Set up basic routes app with test.
-2. Add middleware morgan.
+2. Add middleware morgan- logging.
+3. Add error handling middleware.
