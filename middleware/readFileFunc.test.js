@@ -10,3 +10,15 @@ describe('readFileFunc', () => {
         })
     })
 })
+
+// module.exports = {
+//     readFileFunction: (req, res, next) => {
+//         fs.readFile('hello.md', (error, data) => {
+//             if (error) {
+//                 next(error)
+//             } else {
+//                 res.send(data.toString())
+//             }
+//         })
+//     }
+// }

@@ -17,6 +17,8 @@ https://expressjs.com/en/guide/routing.html#response-methods
 
 3. Add readFile middleware at /filepath with error handling. unit tested.
 
+- got stuck with trying to pass in the fileName path. This needs to be fixed with dependency injection so it can be tested. 
+
 3. Add error handling middleware.
 
-4. Dependency injection middleware.
+4. Dependency injection awlix - fix readfile middleware so tests pass. 

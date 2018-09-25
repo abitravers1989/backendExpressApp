@@ -14,7 +14,7 @@ app.get('/', function (req, res) {
     res.send('Working')
 })
 
-app.use('/filepath', readFileFunc.readFileFunction('hello.md'))
+app.use('/filepath', readFileFunc.readFileFunc)
 
 //app.use('/email', emailRoute)
 module.exports = app;
