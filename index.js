@@ -10,11 +10,27 @@ const readFileFunc = require('./middleware/readFileFunc')
 
 app.use(logger('dev'))
 
+function clientErrorHandler(err, req, res, next) {
+    if (req.xhr) {
+        res.status(500).send({ error: "something went wrong" })
+    } else {
+        next(err)
+    }
+}
+
+function logErrors(err, req, res, next) {
+    console.error(err.stack)
+    next(err)
+}
+
+app.use(clientErrorHandler);
+app.use(logErrors)
+
 app.get('/', function (req, res) {
     res.send('Working')
 })
 
-app.use('/filepath', readFileFunc.readFileFunc)
+app.use('/filepath', readFileFunc.readFileFunction)
 
 //app.use('/email', emailRoute)
 module.exports = app;

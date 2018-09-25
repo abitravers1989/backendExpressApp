@@ -1,6 +1,6 @@
 const fs = require('fs');
 module.exports = {
-    readFileFunc: function (req, res, next) {
+    readFileFunction: function (req, res, next) {
         fs.readFile('hello.md', (error, data) => {
             if (error) {
                 next(error)
@@ -10,3 +10,4 @@ module.exports = {
         })
     }
 }
+

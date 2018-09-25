@@ -21,4 +21,13 @@ https://expressjs.com/en/guide/routing.html#response-methods
 
 3. Add error handling middleware.
 
+4. refactor to server and route.
+
 4. Dependency injection awlix - fix readfile middleware so tests pass. 
+
+5. Unit test middleware properly
+
+6. Add mongoDB.
+
+7. Add POST route. 
+
