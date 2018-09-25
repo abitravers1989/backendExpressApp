@@ -13,6 +13,12 @@ app.get('/', function (req, res) {
     res.send('Working')
 })
 
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.post('/email', (req, res) => {
+    console.log(req)
+    res.send(`posted email ${req.body}`)
+})
 //need to get unit tests working
 app.use('/filepath', readFileFunc.readFileFunction)
 
@@ -22,6 +28,13 @@ module.exports = app;
 const printPort = (portNumber) => { console.log(`listening on port ${portNumber}`) }
 const port = 3000
 app.listen(port, printPort(port))
+
+
+
+
+
+
+
 
 //not needed yet:
 
