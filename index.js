@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 //const emailRoute = require('./router/email')
 const logger = require('morgan');
-const fs = require('fs');
+const readFileFunc = require('./middleware/readFileFunc')
 
 //console.log(area(4))
 
@@ -14,17 +14,8 @@ app.get('/', function (req, res) {
     res.send('Working')
 })
 
-const readFileFunc = function (req, res, next) {
-    fs.readFile('hello.md', (error, data) => {
-        if (error) {
-            next(error)
-        } else {
-            res.send(data.toString())
-        }
-    })
-}
+app.use('/filepath', readFileFunc.readFileFunction('hello.md'))
 
-app.use('/filepath', readFileFunc)
 //app.use('/email', emailRoute)
 module.exports = app;
 
