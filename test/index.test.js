@@ -7,4 +7,21 @@ describe('GET /', () => {
             .get('/')
             .expect(200, done)
     })
+
+    // it('throws an error if something went wrong', (done) => {
+    //     request(app)
+    //         .get('/')
+    //         .request(app)
+    //         .expect(500, done)
+    // })
+})
+
+describe('POST /email', () => {
+    const validEmail = "test@test.com"
+    it('returns 200 when a valid email is POSTED to the endpoint', (done) => {
+        request(app)
+            .get('/email')
+            .send(validEmail)
+            .expect(200, done)
+    })
 })

@@ -7,6 +7,13 @@ module.exports = {
     },
 
     clientErrorHandler: () => {
-        console.log("wroking")
+        return function clientErrorHandler(err, req, res, next) {
+            console.log(req.xhr)
+            if (req.xhr) {
+                res.status(500).send({ error: "something went wrong" })
+            } else {
+                next(err)
+            }
+        }
     }
 }

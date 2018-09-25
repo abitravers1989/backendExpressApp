@@ -19,7 +19,21 @@ https://expressjs.com/en/guide/routing.html#response-methods
 
 - got stuck with trying to pass in the fileName path. This needs to be fixed with dependency injection so it can be tested. 
 
+
 3. Add error handling middleware.
+
+DONT NEED ERROR HANDLING UNTIL POST. 
+
+TO DO:
+
+7. Add POST route.
+8. Impliment error handling. 
+
+9. Add mongo db 
+10. Refactor GET and POST 
+
+11. Fix tests - unit and e-2-e
+12. Delete, GET by one, PUT routes.
 
 4. refactor to server and route.
 
@@ -29,5 +43,17 @@ https://expressjs.com/en/guide/routing.html#response-methods
 
 6. Add mongoDB.
 
-7. Add POST route. 
+
+
+Over-complicated this. Steps now to be:
+
+New MVP:
+1.	GET and POST. E-2-e test. If error handling middleware / validation middleware – unit tests.
+2.	Mongo DB.
+3.	Refactor GET and POST.
+5. Dependency injection for middleware. 
+6.	Add delete and Put 
+
+
+ 
 
