@@ -4,18 +4,26 @@ const app = require('../index.js');
 //
 
 describe('GET /health', () => {
+    const isValidResponse = function (res) {
+        res.body.should.have.property('Working')
+    }
     it('returns 200 status code', (done) => {
         request(app)
             .get('/health')
-            .expect(200, done)
+            .expect(200)
+            .expect(isValidResponse)
+            .end((err) => {
+                if (err) return done(err);
+                done();
+            })
     })
 
-    it('throws an error if something went wrong', (done) => {
-        request(app)
-            .get('/health')
-            .request(app)
-            .expect(500, done)
-    })
+    // it('throws an error if something went wrong', (done) => {
+    //     request(app)
+    //         .get('/health')
+    //         .request(app)
+    //         .expect(500, done)
+    // })
 })
 
 describe('GET /api/health', () => {
@@ -25,16 +33,19 @@ describe('GET /api/health', () => {
             .expect(200, done)
     })
 
-    it('throws an error if something went wrong', (done) => {
-        request(app)
-            .get('/api/health')
-            .request(app)
-            .expect(500, done)
-    })
+    // it('throws an error if something went wrong', (done) => {
+    //     request(app)
+    //         .get('/api/health')
+    //         .request(app)
+    //         .expect(500, done)
+    // })
 })
 
 describe('POST /api/email', () => {
     const validEmail = { "email": "test@test.com" }
+    const isValidResponse = function (res) {
+        res.should.equal('"created user with test@test.com"')
+    }
     it('returns 200 when a valid email is POSTED to the endpoint', (done) => {
         request(app)
             .post('/api/email')
@@ -42,9 +53,7 @@ describe('POST /api/email', () => {
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(201)
-            .expect(function (res) {
-                res.body = '"created user with test@test.com"'
-            })
+            .expect(isValidResponse)
             // .expect('"created user with test@test.com"')
             .end((err) => {
                 if (err) return done(err);
