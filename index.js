@@ -8,7 +8,7 @@ const readFileFunc = require('./middleware/readFileFunc');
 const errorhandling = require('./middleware/errorHandling');
 
 app.use(logger('dev'));
-app.use(clientErrorHandler);
+app.use(errorhandling.clientErrorHandler);
 
 app.get('/health', function (req, res) {
     res.send('Working')
@@ -40,13 +40,13 @@ app.post('/email', (req, res) => {
 
 
 
-function clientErrorHandler(err, req, res, next) {
-    if (req.xhr) {
-        res.status(500).send({ error: 'something went wrong with the request: ' + `${req}` })
-    } else {
-        next(err)
-    }
-}
+// function clientErrorHandler(err, req, res, next) {
+//     if (req.xhr) {
+//         res.status(500).send({ error: 'something went wrong with the request: ' + `${req}` })
+//     } else {
+//         next(err)
+//     }
+// }
 
 
 //need to get unit tests working
