@@ -27,7 +27,10 @@ describe('POST /email', () => {
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(201)
-            .expect('"created user with test@test.com"')
+            .expect(function (res) {
+                res.body = '"created user with test@test.com"'
+            })
+            // .expect('"created user with test@test.com"')
             .end((err) => {
                 if (err) return done(err);
                 done();

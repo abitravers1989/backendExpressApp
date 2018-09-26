@@ -61,6 +61,7 @@ New MVP:
 change to: 26ths Wens 
 
 1. POST end point with e-2-e test. 
+2. Unit test error handling middleware.
 Add swagger to validate input to end point so i know when doing front end app.
 
 
