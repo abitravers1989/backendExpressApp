@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-//const emailRoute = require('./router/email')
+const emailRoute = require('./router/email')
 const logger = require('morgan');
 const readFileFunc = require('./middleware/readFileFunc');
 const errorhandling = require('./middleware/errorHandling');
@@ -33,20 +33,12 @@ app.post('/email', (req, res) => {
 
 })
 
+
 // function logErrors(err, req, res, next) {
 //     console.error(err.stack)
 //     next(err)
 // }
 
-
-
-// function clientErrorHandler(err, req, res, next) {
-//     if (req.xhr) {
-//         res.status(500).send({ error: 'something went wrong with the request: ' + `${req}` })
-//     } else {
-//         next(err)
-//     }
-// }
 
 
 //need to get unit tests working
@@ -58,7 +50,7 @@ app.post('/email', (req, res) => {
 
 
 
-//app.use('/email', emailRoute)
+app.use('/api', emailRoute)
 module.exports = app;
 
 const printPort = (portNumber) => { console.log(`listening on port ${portNumber}`) }

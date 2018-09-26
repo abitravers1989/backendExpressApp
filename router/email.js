@@ -1,13 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function (req, res) {
-    res.send('itenary home page')
-})
+const healthCheck = function (req, res) {
+    res.send('healthy')
+}
 
-//get emails
-// router.post('/', function (req, res) {
-//     //get email off res.email
-// })
+router.route('/health')
+    .get(healthCheck)
 
 module.exports = router;

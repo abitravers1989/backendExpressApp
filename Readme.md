@@ -64,6 +64,10 @@ change to: 26ths Wens
 2. Unit test error handling middleware.
 Add swagger to validate input to end point so i know when doing front end app.
 
+3. Dependency injection.
+4. app and server.
+4. Mongo DB
+
 
  
 
