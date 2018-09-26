@@ -1,10 +1,12 @@
 const request = require('supertest');
 const app = require('../index.js');
 
-describe('GET /', () => {
+//
+
+describe('GET /health', () => {
     it('returns 200 status code', (done) => {
         request(app)
-            .get('/')
+            .get('/health')
             .expect(200, done)
     })
 
@@ -20,7 +22,7 @@ describe('POST /email', () => {
     const validEmail = "test@test.com"
     it('returns 200 when a valid email is POSTED to the endpoint', (done) => {
         request(app)
-            .get('/email')
+            .post('/email')
             .send(validEmail)
             .expect(200, done)
     })

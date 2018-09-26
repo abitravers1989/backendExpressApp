@@ -9,18 +9,24 @@ const errorhandling = require('./middleware/errorHandling');
 
 app.use(logger('dev'))
 
-app.get('/', function (req, res) {
+app.get('/health', function (req, res) {
     res.send('Working')
 })
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/email', (req, res) => {
-    console.log(req)
+    console.log(req.body)
     res.send(`posted email ${req.body}`)
 })
 //need to get unit tests working
 app.use('/filepath', readFileFunc.readFileFunction)
+
+
+//sort end point: https://stackoverflow.com/questions/32883626/typeerror-app-use-requires-middleware-functions
+
+
+
 
 //app.use('/email', emailRoute)
 module.exports = app;
