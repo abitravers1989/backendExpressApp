@@ -44,7 +44,7 @@ TO DO:
 6. Add mongoDB.
 
 
-
+27th Sept
 Over-complicated this. Steps now to be:
 
 New MVP:
@@ -53,6 +53,15 @@ New MVP:
 3.	Refactor GET and POST.
 5. Dependency injection for middleware. 
 6.	Add delete and Put 
+
+
+
+
+
+change to: 26ths Wens 
+
+1. POST end point with e-2-e test. 
+Add swagger to validate input to end point so i know when doing front end app.
 
 
  

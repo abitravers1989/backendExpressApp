@@ -14,11 +14,12 @@ app.get('/health', function (req, res) {
     res.send('Working')
 })
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //pass the error to this callback or use two callbacks
 app.post('/email', (req, res) => {
-    const customerEmail = req.body;
+    const customerEmail = req.body.email;
     console.log(customerEmail)
     //change this to validation middleware.
     //want to log is email in wrong formatt. 
@@ -26,7 +27,7 @@ app.post('/email', (req, res) => {
         return res.status(201).json(`created user with ${customerEmail}`)
     } else {
         // console.error(err.stack)
-        return res.status(400).json('valid email not provided')
+        return res.status(400).send("valid email not provided")
     }
 
 

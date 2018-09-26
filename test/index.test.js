@@ -27,20 +27,22 @@ describe('POST /email', () => {
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(201)
+            .expect('"created user with test@test.com"')
             .end((err) => {
                 if (err) return done(err);
                 done();
             })
     })
 
+    const inValidResponse = "valid email not provided";
     it('returns 400 with not created if an in-valid email is POSTED to the endpoint', (done) => {
         request(app)
             .post('/email')
             .send("nothing")
             .set('Accept', 'application/json')
-            .expect('Content-Type', /json/)
+            .expect('Content-Type', "text/html; charset=utf-8")
             .expect(400)
-            .expect('valid email not provided')
+            .expect(inValidResponse)
             .end((err) => {
                 if (err) return done(err);
                 done();
