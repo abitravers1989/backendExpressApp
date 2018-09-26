@@ -1,4 +1,4 @@
-const { area, perimeter } = require('./middleware/exampleSquare');
+//const { area, perimeter } = require('./middleware/exampleSquare');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -7,7 +7,8 @@ const logger = require('morgan');
 const readFileFunc = require('./middleware/readFileFunc');
 const errorhandling = require('./middleware/errorHandling');
 
-app.use(logger('dev'))
+app.use(logger('dev'));
+app.use(clientErrorHandler);
 
 app.get('/health', function (req, res) {
     res.send('Working')
@@ -15,12 +16,40 @@ app.get('/health', function (req, res) {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//pass the error to this callback or use two callbacks
 app.post('/email', (req, res) => {
-    console.log(req.body)
-    res.send(`posted email ${req.body}`)
+    const customerEmail = req.body;
+    console.log(customerEmail)
+    //change this to validation middleware.
+    //want to log is email in wrong formatt. 
+    if (customerEmail) {
+        return res.status(201).json(`created user with ${customerEmail}`)
+    } else {
+        // console.error(err.stack)
+        return res.status(400).json('valid email not provided')
+    }
+
+
 })
+
+// function logErrors(err, req, res, next) {
+//     console.error(err.stack)
+//     next(err)
+// }
+
+
+
+function clientErrorHandler(err, req, res, next) {
+    if (req.xhr) {
+        res.status(500).send({ error: 'something went wrong with the request: ' + `${req}` })
+    } else {
+        next(err)
+    }
+}
+
+
 //need to get unit tests working
-app.use('/filepath', readFileFunc.readFileFunction)
+//app.use('/filepath', readFileFunc.readFileFunction)
 
 
 //sort end point: https://stackoverflow.com/questions/32883626/typeerror-app-use-requires-middleware-functions

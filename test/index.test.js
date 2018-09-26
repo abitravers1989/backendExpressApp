@@ -19,11 +19,31 @@ describe('GET /health', () => {
 })
 
 describe('POST /email', () => {
-    const validEmail = "test@test.com"
+    const validEmail = { "email": "test@test.com" }
     it('returns 200 when a valid email is POSTED to the endpoint', (done) => {
         request(app)
             .post('/email')
             .send(validEmail)
-            .expect(200, done)
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(201)
+            .end((err) => {
+                if (err) return done(err);
+                done();
+            })
+    })
+
+    it('returns 400 with not created if an in-valid email is POSTED to the endpoint', (done) => {
+        request(app)
+            .post('/email')
+            .send("nothing")
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(400)
+            .expect('valid email not provided')
+            .end((err) => {
+                if (err) return done(err);
+                done();
+            })
     })
 })
