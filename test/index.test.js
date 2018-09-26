@@ -10,19 +10,34 @@ describe('GET /health', () => {
             .expect(200, done)
     })
 
-    // it('throws an error if something went wrong', (done) => {
-    //     request(app)
-    //         .get('/')
-    //         .request(app)
-    //         .expect(500, done)
-    // })
+    it('throws an error if something went wrong', (done) => {
+        request(app)
+            .get('/health')
+            .request(app)
+            .expect(500, done)
+    })
 })
 
-describe('POST /email', () => {
+describe('GET /api/health', () => {
+    it('returns 200 status code', (done) => {
+        request(app)
+            .get('/api/health')
+            .expect(200, done)
+    })
+
+    it('throws an error if something went wrong', (done) => {
+        request(app)
+            .get('/api/health')
+            .request(app)
+            .expect(500, done)
+    })
+})
+
+describe('POST /api/email', () => {
     const validEmail = { "email": "test@test.com" }
     it('returns 200 when a valid email is POSTED to the endpoint', (done) => {
         request(app)
-            .post('/email')
+            .post('/api/email')
             .send(validEmail)
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
@@ -40,7 +55,7 @@ describe('POST /email', () => {
     const inValidResponse = "valid email not provided";
     it('returns 400 with not created if an in-valid email is POSTED to the endpoint', (done) => {
         request(app)
-            .post('/email')
+            .post('/api//email')
             .send("nothing")
             .set('Accept', 'application/json')
             .expect('Content-Type', "text/html; charset=utf-8")
