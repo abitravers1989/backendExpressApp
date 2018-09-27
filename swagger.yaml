@@ -5,10 +5,10 @@ info:
   title: Simple backend API
   description: A simple API express app to save emails to a database. 
 
-schemes:
-  - http
+produces: application/json
+
 host: localhost:3000
-basePath: /
+basePath: /api
 
 paths:
   /health:
@@ -20,7 +20,7 @@ paths:
           description: Working 
           schema:
             type: string
-  /api/email:
+  /api/user:
     post:
       summary: Creates a new user with name and email properties. 
       description: Takes a JSON object with "name:" "exampleName", "email:" "exampleEmail", and creates a new user. 
@@ -43,5 +43,7 @@ paths:
           description: Succesfully created user. 
         400:
           description: Unable to create user.
-      
+ 
+# https://github.com/apigee-127/swagger-tools/blob/master/docs/API.md          
+
 # https://apihandyman.io/writing-openapi-swagger-specification-tutorial-part-2-the-basics/

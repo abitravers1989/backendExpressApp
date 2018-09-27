@@ -5,14 +5,14 @@ const healthCheck = function (req, res) {
     res.send('healthy')
 }
 
-const sendOneEmail = function (req, res) {
+const createOneUser = function (req, res) {
     const customerEmail = req.body.email;
     const customerName = req.body.name;
     // console.log(customerEmail)
     // console.log(customerName)
     //change this to validation middleware.
     //want to log is email in wrong formatt. 
-    if (customerEmail) {
+    if (customerEmail && customerName) {
         return res.status(201).json(`Created user with: Name: ${customerName} Email: ${customerEmail}`)
     } else {
         // console.error(err.stack)
@@ -23,7 +23,7 @@ const sendOneEmail = function (req, res) {
 router.route('/health')
     .get(healthCheck)
 
-router.route('/email')
-    .post(sendOneEmail)
+router.route('/user')
+    .post(createOneUser)
 
 module.exports = router;

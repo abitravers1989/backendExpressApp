@@ -2,11 +2,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const emailRoute = require('./router/email');
+const userRoute = require('./router/user');
 const logger = require('morgan');
 const errorhandling = require('./middleware/errorHandling');
-//const swaggerUi = require('swagger-ui-express');
-//const swaggerDocument = require('./swagger.yaml');
+// const swaggerUi = require('swagger-ui-express');
+// const swaggerDocument = require('./swagger.yaml');
+const swaggerTool = require('swagger-tools');
 
 
 app.use(logger('dev'));
@@ -25,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //sort end point: https://stackoverflow.com/questions/32883626/typeerror-app-use-requires-middleware-functions
 
 //app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-app.use('/api', emailRoute)
+app.use('/api', userRoute)
 
 module.exports = app;
 

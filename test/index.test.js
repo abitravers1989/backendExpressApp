@@ -31,11 +31,11 @@ describe('GET /api/health', () => {
     })
 })
 
-describe('POST /api/email', () => {
+describe('POST /api/user', () => {
     const validEmail = { "name": "whoDis", "email": "test@test.com" }
     it('returns 200 when a valid email is POSTED to the endpoint', (done) => {
         request(app)
-            .post('/api/email')
+            .post('/api/user')
             .send(validEmail)
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
@@ -50,7 +50,7 @@ describe('POST /api/email', () => {
     const inValidResponse = "valid email not provided";
     it('returns 400 with not created if an in-valid email is POSTED to the endpoint', (done) => {
         request(app)
-            .post('/api//email')
+            .post('/api/user')
             .send("nothing")
             .set('Accept', 'application/json')
             .expect('Content-Type', "text/html; charset=utf-8")

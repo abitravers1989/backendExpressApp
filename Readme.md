@@ -90,7 +90,9 @@ ACTUALLY 27th wens:
 2. set up test TDD add of name as well to post req. 
 3. add this to route
 4. Add Post email route to swagger.
-
+"add swagger but not sure if working"
+5. read swagger - change to swagger-tool
+6. change email route to be named user to more acurately refelect what it now is 
 
 
 STRUGGLED WITH:
