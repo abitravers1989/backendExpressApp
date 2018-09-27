@@ -5,8 +5,9 @@ const app = express();
 const emailRoute = require('./router/email');
 const logger = require('morgan');
 const errorhandling = require('./middleware/errorHandling');
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./router/swagger.yaml');
+//const swaggerUi = require('swagger-ui-express');
+//const swaggerDocument = require('./router/swagger.yaml');
+
 
 app.use(logger('dev'));
 app.use(errorhandling.clientErrorHandler);
@@ -14,7 +15,8 @@ app.use(errorhandling.logErrors);
 
 app.get('/health', function (req, res) {
     res.send('Working')
-    console.log(res);
+    //where is the 'Working' in the response?
+    //console.log(res);
 })
 
 app.use(bodyParser.json())

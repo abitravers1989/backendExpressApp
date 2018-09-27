@@ -4,20 +4,17 @@ const app = require('../index.js');
 //
 
 describe('GET /health', () => {
-    const isValidResponse = function (res) {
-        res.body.should.have.property('Working')
-    }
     it('returns 200 status code', (done) => {
         request(app)
             .get('/health')
             .expect(200)
-            .expect(isValidResponse)
+            .expect('Working')
             .end((err) => {
                 if (err) return done(err);
                 done();
             })
     })
-
+    //how do i test something going wrong / what is that situation?
     // it('throws an error if something went wrong', (done) => {
     //     request(app)
     //         .get('/health')
@@ -32,20 +29,10 @@ describe('GET /api/health', () => {
             .get('/api/health')
             .expect(200, done)
     })
-
-    // it('throws an error if something went wrong', (done) => {
-    //     request(app)
-    //         .get('/api/health')
-    //         .request(app)
-    //         .expect(500, done)
-    // })
 })
 
 describe('POST /api/email', () => {
-    const validEmail = { "email": "test@test.com" }
-    const isValidResponse = function (res) {
-        res.should.equal('"created user with test@test.com"')
-    }
+    const validEmail = { "name": "whoDis", "email": "test@test.com" }
     it('returns 200 when a valid email is POSTED to the endpoint', (done) => {
         request(app)
             .post('/api/email')
@@ -53,8 +40,7 @@ describe('POST /api/email', () => {
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(201)
-            .expect(isValidResponse)
-            // .expect('"created user with test@test.com"')
+            .expect('"Created user with: Name: whoDis Email: test@test.com"')
             .end((err) => {
                 if (err) return done(err);
                 done();
