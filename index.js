@@ -29,13 +29,17 @@ const swaggerTool = require('swagger-tools');
 const swaggerObject = require('./swagger.yaml');
 //what is swaggerMetadata?
 
-swaggerTool.initializeMiddleware(swaggerObject, function (middleware) {
-    app.use(middleware.swaggerMetadata());
-    // Validate Swagger requests
-    app.use(middleware.swaggerValidator({
-        validateResponse: true
-    }));
-})
+// swaggerTool.initializeMiddleware(swaggerObject, function (middleware) {
+//     app.use(middleware.swaggerMetadata());
+//     // Validate Swagger requests
+//     app.use(middleware.swaggerValidator({
+//         validateResponse: true
+//     }));
+// })
+
+// const spec = require('swagger-tools').specs.v2; 
+
+spec.composeModel(user)
 
 module.exports = app;
 
