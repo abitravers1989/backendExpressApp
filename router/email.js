@@ -7,11 +7,13 @@ const healthCheck = function (req, res) {
 
 const sendOneEmail = function (req, res) {
     const customerEmail = req.body.email;
-    console.log(customerEmail)
+    const customerName = req.body.name;
+    // console.log(customerEmail)
+    // console.log(customerName)
     //change this to validation middleware.
     //want to log is email in wrong formatt. 
     if (customerEmail) {
-        return res.status(201).json(`created user with ${customerEmail}`)
+        return res.status(201).json(`Created user with: Name: ${customerName} Email: ${customerEmail}`)
     } else {
         // console.error(err.stack)
         return res.status(400).send("valid email not provided")

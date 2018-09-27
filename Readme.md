@@ -75,6 +75,27 @@ NOW:
 
 5. Add swagger 
 
+PLan 27th wens:
+1. Added awlix but haven't implimented it.
+2. set up test TDD add of name as well to post req. 
+3. add this to route.
+
+TODO:
+4. ADD mongo
+
+5. Need to add email validation which checks for @ and also doesn't allow characters which attack a db 
+
+ACTUALLY 27th wens:
+1. Added awlix but haven't implimented it.
+2. set up test TDD add of name as well to post req. 
+3. add this to route
+4. Add Post email route to swagger.
+
+
+
+STRUGGLED WITH:
+
+
 
  
 

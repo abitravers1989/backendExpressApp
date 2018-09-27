@@ -1,0 +1,47 @@
+swagger: "2.0"
+
+info:
+  version: '1.0.0'
+  title: Simple backend API
+  description: A simple API express app to save emails to a database. 
+
+schemes:
+  - http
+host: localhost:3000
+basePath: /
+
+paths:
+  /health:
+    get:
+      summary: Simple GET return.
+      description: Checks the API is working by returning text.
+      responses:
+        200:
+          description: Working 
+          schema:
+            type: string
+  /api/email:
+    post:
+      summary: Creates a new user with name and email properties. 
+      description: Takes a JSON object with "name:" "exampleName", "email:" "exampleEmail", and creates a new user. 
+      parameters:
+        name: user
+        in: body
+        description: user to be created.
+        schema:
+          type: json
+          required:
+            - name
+            - email
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+      responses:
+        201:
+          description: Succesfully created user. 
+        400:
+          description: Unable to create user.
+      
+# https://apihandyman.io/writing-openapi-swagger-specification-tutorial-part-2-the-basics/

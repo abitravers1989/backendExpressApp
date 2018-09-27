@@ -6,7 +6,7 @@ const emailRoute = require('./router/email');
 const logger = require('morgan');
 const errorhandling = require('./middleware/errorHandling');
 //const swaggerUi = require('swagger-ui-express');
-//const swaggerDocument = require('./router/swagger.yaml');
+//const swaggerDocument = require('./swagger.yaml');
 
 
 app.use(logger('dev'));
