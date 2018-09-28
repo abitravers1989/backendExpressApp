@@ -23,10 +23,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api', userRoute)
 
+//https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/mongoose
+var mongoose = require('mongoose');
+const mongoDB = "mongodb://localhost:27017";
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'))
+
+
+
+
 //swagger
 
-const swaggerTool = require('swagger-tools');
-const swaggerObject = require('./swagger.yaml');
+//const swaggerTool = require('swagger-tools');
+//const swaggerObject = require('./swagger.yaml');
 //what is swaggerMetadata?
 
 // swaggerTool.initializeMiddleware(swaggerObject, function (middleware) {
@@ -39,7 +50,7 @@ const swaggerObject = require('./swagger.yaml');
 
 // const spec = require('swagger-tools').specs.v2; 
 
-spec.composeModel(user)
+//spec.composeModel(user)
 
 module.exports = app;
 
