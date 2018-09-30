@@ -5,6 +5,7 @@ const app = express();
 const userRoute = require('./router/user');
 const logger = require('morgan');
 const errorhandling = require('./middleware/errorHandling');
+const fs = require('fs');
 
 app.use(logger('dev'));
 app.use(errorhandling.clientErrorHandler);
@@ -23,6 +24,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api', userRoute)
 
+
+//setup log
+
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+
+
+// setup the logger
+app.use(logger('combined', { stream: accessLogStream }))
+
+
+
+
+
+//database
+
+const printOutPut = () => {
+    console.log("database connected on")
+}
+
 //https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/mongoose
 var mongoose = require('mongoose');
 const mongoDB = "mongodb://localhost:27017";
@@ -30,6 +50,7 @@ mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
+db.on('open', printOutPut);
 
 
 
