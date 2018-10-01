@@ -25,13 +25,29 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api', userRoute)
 
 
+
+
+
+
+
 //setup log
 
-var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+const printOutPutLog = () => {
+    console.log("logging stream on")
+}
 
+const closedLog = () => {
+    console.log("closed logging stream")
+}
 
-// setup the logger
+var accessLogStream = fs.createWriteStream('log.txt', { flags: 'r+' });
 app.use(logger('combined', { stream: accessLogStream }))
+
+accessLogStream.on('open', printOutPutLog)
+accessLogStream.on('close', closedLog)
+
+
+
 
 
 

@@ -99,5 +99,17 @@ STRUGGLED WITH:
 
 
 
+
+
+1st Oct.
+
+1. Logging of errors to file stream added but not working.
+
+TODO:
+
+1. Fix logging
+1. complete connection to mongoDB
+2. Test this.
+
  
 
