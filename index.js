@@ -40,7 +40,7 @@ const closedLog = () => {
     console.log("closed logging stream")
 }
 
-var accessLogStream = fs.createWriteStream('log.txt', { flags: 'r+' });
+var accessLogStream = fs.createWriteStream('log.txt', { flags: 'a' });
 app.use(logger('combined', { stream: accessLogStream }))
 
 accessLogStream.on('open', printOutPutLog)
@@ -55,20 +55,19 @@ accessLogStream.on('close', closedLog)
 
 //database
 
-const printOutPut = () => {
-    console.log("database connected on")
-}
-
 //https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/mongoose
-var mongoose = require('mongoose');
-const mongoDB = "mongodb://localhost:27017";
-mongoose.connect(mongoDB);
-mongoose.Promise = global.Promise;
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'))
-db.on('open', printOutPut);
+// const mongoose = require('mongoose');
+// const mongoDB = "mongodb://localhost:27017";
+// mongoose.connect(mongoDB);
+// mongoose.Promise = global.Promise;
+// const db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'MongoDB connection error:'))
+// db.on('open', printOutPut);
 
-
+const Database = require('./database');
+const mongoose = require('mongoose');
+const mongoDB = new Database("mongodb://localhost:27017", mongoose);
+mongoDB.connectAndSetUpListners();
 
 
 //swagger
