@@ -48,10 +48,32 @@ accessLogStream.on('close', closedLog)
 //https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/mongoose
 
 
-const Database = require('./database');
-const mongoose = require('mongoose');
-const mongoDB = new Database("mongodb://localhost:27017", mongoose);
-mongoDB.connectAndSetUpListners();
+// const Database = require('./model/userModel');
+// const mongoose = require('mongoose');
+// const mongoDB = new Database("mongodb://localhost:27017", mongoose);
+// mongoDB.connectAndSetUpListners();
+
+const mongoClient = require('mongodb').MongoClient
+//simple-node-backend-app
+mongodb://<dbuser>:<dbpassword>@ds135394.mlab.com:35394/simple-node-backend-app
+mongoClient.connect('mongodb://localhost:27017/backendApp', (err, db) => {
+    if (err) throw err
+    db.collection('users').find().toArray((err, result) => {
+        if (err) throw err;
+        console.log(result)
+    })
+})
+
+//https://zellwk.com/blog/crud-express-mongodb/
+
+
+
+
+
+
+
+
+
 
 
 //swagger
