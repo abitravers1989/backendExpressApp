@@ -55,25 +55,22 @@ accessLogStream.on('close', closedLog)
 // const mongoDB = new Database("mongodb://localhost:27017", mongoose);
 // mongoDB.connectAndSetUpListners();
 
-const userName = process.env.USER_NAME;
-const passWord = process.env.PASSWORD;
+const userName = process.env.USER_NAME
+const passWord = process.env.PASSWORD
 console.log(userName)
 console.log(passWord)
 
-// const mongoClient = require('mongodb').MongoClient
+const mongoClient = require('mongodb').MongoClient
+const mongoConnectionString = `mongodb://${process.env.USER_NAME}:${process.env.PASSWORD}@ds135394.mlab.com:35394/simple-node-backend-app`
 
-// //mongodb://<dbuser>:<dbpassword>@ds135394.mlab.com:35394/simple-node-backend-app
-// mongoClient.connect('mongodb://localhost:27017/backendApp', (err, database) => {
-//     const userName = process.env.USER_NAME;
-//     const passWord = process.env.PASSWORD;
-//     console.log(userName)
-//     console.log(passWord)
-//     if (err) throw err
-//     database.collection('users').find().toArray((err, result) => {
-//         if (err) throw err;
-//         console.log(result)
-//     })
-// })
+mongoClient.connect(mongoConnectionString, (err, database) => {
+    if (err) throw err
+    const myDatabase = database.db('simple-node-backend-app')
+    myDatabase.collection('users').find().toArray((err, result) => {
+        if (err) throw err;
+        console.log(result)
+    })
+})
 
 //https://zellwk.com/blog/crud-express-mongodb/
 
