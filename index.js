@@ -6,6 +6,8 @@ const userRoute = require('./router/user');
 const logger = require('morgan');
 const errorhandling = require('./middleware/errorHandling');
 const fs = require('fs');
+//need to require this so can use .env variables
+const envs = require('dotenv').config();
 
 app.use(logger('dev'));
 app.use(errorhandling.clientErrorHandler);
@@ -53,16 +55,25 @@ accessLogStream.on('close', closedLog)
 // const mongoDB = new Database("mongodb://localhost:27017", mongoose);
 // mongoDB.connectAndSetUpListners();
 
-const mongoClient = require('mongodb').MongoClient
-//simple-node-backend-app
-mongodb://<dbuser>:<dbpassword>@ds135394.mlab.com:35394/simple-node-backend-app
-mongoClient.connect('mongodb://localhost:27017/backendApp', (err, db) => {
-    if (err) throw err
-    db.collection('users').find().toArray((err, result) => {
-        if (err) throw err;
-        console.log(result)
-    })
-})
+const userName = process.env.USER_NAME;
+const passWord = process.env.PASSWORD;
+console.log(userName)
+console.log(passWord)
+
+// const mongoClient = require('mongodb').MongoClient
+
+// //mongodb://<dbuser>:<dbpassword>@ds135394.mlab.com:35394/simple-node-backend-app
+// mongoClient.connect('mongodb://localhost:27017/backendApp', (err, database) => {
+//     const userName = process.env.USER_NAME;
+//     const passWord = process.env.PASSWORD;
+//     console.log(userName)
+//     console.log(passWord)
+//     if (err) throw err
+//     database.collection('users').find().toArray((err, result) => {
+//         if (err) throw err;
+//         console.log(result)
+//     })
+// })
 
 //https://zellwk.com/blog/crud-express-mongodb/
 
