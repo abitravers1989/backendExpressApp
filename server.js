@@ -51,10 +51,13 @@ const mongoClient = require('mongodb').MongoClient
 const mongoConnectionString = `mongodb://${process.env.USER_NAME}:${process.env.PASSWORD}@ds135394.mlab.com:35394/simple-node-backend-app`
 
 
-app.listen(3000, app.emit('listened', null))
+app.listen(3000, function () {
+    app.emit('listened', null)
+}) //console.log('working'))
 
 app.on('listened', function () {
     console.log(`listening on port 3000`)
+    //console.log(database.connect(mongoClient, mongoConnectionString))
     database.connect(mongoClient, mongoConnectionString);
 })
 
