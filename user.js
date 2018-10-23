@@ -14,21 +14,34 @@
 // delete
 //     replace / alter
 
-const database = require('./mongo')
+//const database = require('./mongo')
 
-module.exports = function userService({ database }) {
-    return {
-        getUsers: () => {
-            //return database.query('select * from users')
-
-            //     //const myDatabase = database.db('simple-node-backend-app')
-            myDatabase.collection('users').find().toArray((err, result) => {
-                if (err) throw err;
-                console.log(result)
-            })
-
-        }
+module.exports = class user {
+    constructor(database) {
+        this.database = database;
+    }
+    getUsers() {
+        myDatabase.collection('users').find().toArray((err, result) => {
+            if (err) throw err;
+            console.log(result)
+        })
     }
 }
 
 
+
+
+// function userService({ database) {
+//     return {
+//         getUsers: () => {
+//             //return database.query('select * from users')
+
+//             //     //const myDatabase = database.db('simple-node-backend-app')
+//             myDatabase.collection('users').find().toArray((err, result) => {
+//                 if (err) throw err;
+//                 console.log(result)
+//             })
+
+//         }
+//     }
+// }

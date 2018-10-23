@@ -27,7 +27,6 @@ app.get('/health', function (req, res) {
 app.use('/api', userRoute)
 
 
-
 //setup log
 
 const printOutPutLog = () => {
@@ -49,7 +48,7 @@ accessLogStream.on('close', closedLog)
 const database = require('./mongo');
 const mongoClient = require('mongodb').MongoClient
 const mongoConnectionString = `mongodb://${process.env.USER_NAME}:${process.env.PASSWORD}@ds135394.mlab.com:35394/simple-node-backend-app`
-
+const user = require('./user');
 
 app.listen(3000, function () {
     app.emit('listened', null)
@@ -58,12 +57,16 @@ app.listen(3000, function () {
 app.on('listened', function () {
     console.log(`listening on port 3000`)
     //console.log(database.connect(mongoClient, mongoConnectionString))
-    database.connect(mongoClient, mongoConnectionString);
+    const mongoDb = new database(mongoClient, mongoConnectionString);
+    await mongoDb.connect();
+    console.log(mongoDb.myDatabase)
+    //mongoDb.getAll()
+    //console.log(new user(mongoDb.myDatabase))
 })
 
-// const user = require('./user');
 
-// user(database2);
+
+
 
 module.exports = app;
 
