@@ -46,28 +46,31 @@ accessLogStream.on('close', closedLog)
 
 
 
-
-//listen to mongo and startup the app.
-// const userName = process.env.USER_NAME
-// const passWord = process.env.PASSWORD
-// console.log(userName)
-// console.log(passWord)
-
+const database = require('./mongo');
 const mongoClient = require('mongodb').MongoClient
 const mongoConnectionString = `mongodb://${process.env.USER_NAME}:${process.env.PASSWORD}@ds135394.mlab.com:35394/simple-node-backend-app`
 
-mongoClient.connect(mongoConnectionString, { useNewUrlParser: true }, (err, database) => {
-    if (err) throw err
-    const myDatabase = database.db('simple-node-backend-app')
-    //move this into get endpooint
-    // myDatabase.collection('users').find().toArray((err, result) => {
-    //     if (err) throw err;
-    //     console.log(result)
-    // })
-    const printPort = (portNumber) => { console.log(`listening on port ${portNumber}`) }
-    const port = 3000
-    app.listen(port, printPort(port))
+
+app.listen(3000, app.emit('listened', null))
+
+app.on('listened', function () {
+    console.log(`listening on port 3000`)
+    database.connect(mongoClient, mongoConnectionString);
 })
+
+// const user = require('./user');
+
+// user(database2);
+
+module.exports = app;
+
+
+
+
+
+
+
+
 
 //https://zellwk.com/blog/crud-express-mongodb/
 
@@ -99,4 +102,4 @@ mongoClient.connect(mongoConnectionString, { useNewUrlParser: true }, (err, data
 
 //spec.composeModel(user)
 
-module.exports = app;
+
