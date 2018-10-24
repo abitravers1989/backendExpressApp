@@ -56,10 +56,11 @@ app.listen(3000, function () {
 
 app.on('listened', function () {
     console.log(`listening on port 3000`)
+    console.log(database)
     //console.log(database.connect(mongoClient, mongoConnectionString))
-    const mongoDb = new database(mongoClient, mongoConnectionString);
-    await mongoDb.connect();
-    console.log(mongoDb.myDatabase)
+    database.connect(mongoClient, mongoConnectionString);
+    //await mongoDb.connect();
+    //console.log(mongoDb.myDatabase)
     //mongoDb.getAll()
     //console.log(new user(mongoDb.myDatabase))
 })
