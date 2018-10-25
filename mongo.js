@@ -1,22 +1,38 @@
-module.exports = {
-    connect: async (mongoClient, mongoConnectionString) => {
-        try {
-            let client = await mongoClient.connect(mongoConnectionString, { useNewUrlParser: true })
-            let db = client.db('simple-node-backend-app');
-            try {
-                const res = await db.collection('users').updateOne({
-                    "email": 'test@test.com'
-                }, { $set: someObj }, { upsert: true })
-                console.log(`res => ${JSON.stringify(res)}`)
-            }
-            catch {
-                (err => console.log(err))
-            }
-            finally {
-                client.close();
-            }
-        }
-    }
+const { MongoClient } = require('mongodb');
+const promisify = require('es6-promisify')
+
+const mongoConnectionString = `mongodb://${process.env.USER_NAME}:${process.env.PASSWORD}@ds135394.mlab.com:35394/simple-node-backend-app`
+let _connection;
+
+// const connection = () => {
+//     if (!p)
+// }
+
+const thing = MongoClient.connect
+
+console.log(new thing.MongoError());
+
+
+
+// module.exports = {
+//     connect: async (mongoClient, mongoConnectionString) => {
+//         try {
+//             let client = await mongoClient.connect(mongoConnectionString, { useNewUrlParser: true })
+//             let db = client.db('simple-node-backend-app');
+//             try {
+//                 const res = await db.collection('users').updateOne({
+//                     "email": 'test@test.com'
+//                 }, { $set: someObj }, { upsert: true })
+//                 console.log(`res => ${JSON.stringify(res)}`)
+//             }
+//             catch {
+//                 (err => console.log(err))
+//             }
+//             finally {
+//                 client.close();
+//             }
+//         }
+//     }
         //catch { console.log(err) }
     //}
 
