@@ -44,7 +44,8 @@ accessLogStream.on('open', printOutPutLog)
 accessLogStream.on('close', closedLog)
 
 
-
+//console.log(process.env.USER_NAME)
+console.log(process.env.PASSWORD)
 const database = require('./mongo');
 const mongoClient = require('mongodb').MongoClient
 const mongoConnectionString = `mongodb://${process.env.USER_NAME}:${process.env.PASSWORD}@ds135394.mlab.com:35394/simple-node-backend-app`

@@ -4,13 +4,23 @@ const promisify = require('es6-promisify')
 const mongoConnectionString = `mongodb://${process.env.USER_NAME}:${process.env.PASSWORD}@ds135394.mlab.com:35394/simple-node-backend-app`
 let _connection;
 
-// const connection = () => {
-//     if (!p)
-// }
+const connection = () => {
+    //console.log(process.env.USER_NAME)
+    if (!process.env.USER_NAME && !process.env.PASSWORD) {
+        throw console.log("Mongo user name and password is not provided.")
+    }
+    _connection = MongoClient.connect(mongoConnectionString, { useNewUrlParser: true })
+}
 
-const thing = MongoClient.connect
+connection()
 
-console.log(new thing.MongoError());
+
+// const thing = MongoClient.connect
+
+// console.log(new thing.MongoError());
+
+
+
 
 
 

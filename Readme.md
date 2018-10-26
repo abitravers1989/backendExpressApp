@@ -1,3 +1,12 @@
+export USER_NAME=value
+export PASSWORD=value
+
+(create a shell script to do this https://buildkite.com/docs/pipelines/writing-build-scripts)
+
+
+
+
+
 Resources:
 
 https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Introduction
