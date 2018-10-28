@@ -7,7 +7,7 @@ const logger = require('morgan');
 const errorhandling = require('./middleware/errorHandling');
 const fs = require('fs');
 //need to require this so can use .env variables
-const envs = require('dotenv').config();
+//const envs = require('dotenv').config();
 
 
 
@@ -16,16 +16,6 @@ app.use(errorhandling.clientErrorHandler);
 app.use(errorhandling.logErrors);
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }));
-
-app.get('/health', function (req, res) {
-    res.send('Working')
-    //where is the 'Working' in the response?
-    //console.log(res);
-})
-
-//sort end point: https://stackoverflow.com/questions/32883626/typeerror-app-use-requires-middleware-functions
-app.use('/api', userRoute)
-
 
 //setup log
 
@@ -45,11 +35,14 @@ accessLogStream.on('close', closedLog)
 
 
 //console.log(process.env.USER_NAME)
-console.log(process.env.PASSWORD)
+//console.log(process.env.PASSWORD)
 const database = require('./mongo');
-const mongoClient = require('mongodb').MongoClient
-const mongoConnectionString = `mongodb://${process.env.USER_NAME}:${process.env.PASSWORD}@ds135394.mlab.com:35394/simple-node-backend-app`
-const user = require('./user');
+
+app.use(function(req, res, next) {
+    req.db = database;
+    next();
+})
+
 
 app.listen(3000, function () {
     app.emit('listened', null)
@@ -57,16 +50,10 @@ app.listen(3000, function () {
 
 app.on('listened', function () {
     console.log(`listening on port 3000`)
-    console.log(database)
-    //console.log(database.connect(mongoClient, mongoConnectionString))
-    database.connect(mongoClient, mongoConnectionString);
-    //await mongoDb.connect();
-    //console.log(mongoDb.myDatabase)
-    //mongoDb.getAll()
-    //console.log(new user(mongoDb.myDatabase))
 })
 
-
+//sort end point: https://stackoverflow.com/questions/32883626/typeerror-app-use-requires-middleware-functions
+app.use('/api', userRoute)
 
 
 
