@@ -1,4 +1,4 @@
-##To Build##
+## To Build
 
 1	Simple CRUD node app. Which gets, adds, updates and deletes things from a database. Provides relevant (get, post etc) endpoints.
 2	Add Dependency Injection (awlix)
@@ -11,10 +11,10 @@
 9	Deploy 
 	
 
-##ENVS##
+## ENVS
 
 export USER_NAME=value
 export PASSWORD=value
 
-##To Run##
+## To Run
 `nodemon server.js`
