@@ -1,21 +1,20 @@
-const { MongoClient } = require('mongodb');
-//const promisify = require('es6-promisify')
-
-const mongoConnectionString = `mongodb://${process.env.USER_NAME}:${process.env.PASSWORD}@ds135394.mlab.com:35394/simple-node-backend-app`
-//const mongoConnectionString = 'mongodb://localhost/nodeBackend';
+// const { MongoClient } = require('mongodb');
+// const mongoConnectionString = `mongodb://${process.env.USER_NAME}:${process.env.PASSWORD}@ds135394.mlab.com:35394/simple-node-backend-app`
+// const mongoConnectionString = 'mongodb://localhost/       REMOVE?nodeBackend';
 
 module.exports = {
-    connect: () => {
+    connect: (MongoClient, mongoConnectionString) => {
         //console.log(process.env.USER_NAME)
         if (!process.env.USER_NAME && !process.env.PASSWORD) {
             throw console.log("Mongo user name and password is not provided.")
         }
-        MongoClient.connect(mongoConnectionString, { useNewUrlParser: true }, (err, db) => {
+        const client = MongoClient.connect(mongoConnectionString, { useNewUrlParser: true }, (err, db) => {
             if (err) throw console.log(err);
             console.log('Mongo on');
             //db.close;
         })
-        return MongoClient.resolve();
+        const database = client.db('simple-node-backend-app');
+        return database;
     }
 }
 

@@ -37,11 +37,13 @@ accessLogStream.on('close', closedLog)
 //console.log(process.env.USER_NAME)
 //console.log(process.env.PASSWORD)
 const database = require('./repository/mongo');
+const { MongoClient } = require('mongodb');
+const mongoConnectionString = `mongodb://${process.env.USER_NAME}:${process.env.PASSWORD}@ds135394.mlab.com:35394/simple-node-backend-app`
 
 app.use(function (req, res, next) {
     //it is undefined at this level
     console.log(database);
-    console.log(`database.connect(): ${database.connect()}`)
+    console.log(`database.connect(): ${database.connect(MongoClient, mongoConnectionString)}`)
     req.db = database.connect();
     next();
 })
