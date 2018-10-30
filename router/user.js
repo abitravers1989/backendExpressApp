@@ -6,17 +6,18 @@ const healthCheck = function (req, res) {
     res.send('healthy')
 }
 
-const createOneUser = function (req, res) {
-    const customerEmail = req.body.email;
-    const customerName = req.body.name;
-    // console.log(customerEmail)
-    // console.log(customerName)
-    //change this to validation middleware.
-    //want to log is email in wrong formatt. 
-    if (customerEmail && customerName) {
-        return res.status(201).json(`Created user with: Name: ${customerName} Email: ${customerEmail}`)
+const insertOneUser = function (req, res) {
+    const customerObj = { name: req.body.name, email: req.body.email }
+    console.log(customerObj)
+    const database = req.db;
+    if (customerObj.name && customerObj.email) {
+        database.collection('users').insertOne(customerObj, (err, res) => {
+            if (err) throw err;
+            database.close();
+            return res.status(201).json(`Custmer object was created: ${customerObj}`)
+        })
     } else {
-        // console.error(err.stack)
+        database.close();
         return res.status(400).send("valid email not provided")
     }
 }
@@ -30,6 +31,7 @@ const getAll = function (req, res) {
         if (err) throw console.log(err);
         res.send(doc)
     })
+    database.close();
 }
 
 router.route('/health')
@@ -37,6 +39,6 @@ router.route('/health')
 
 router.route('/user')
     .get(getAll)
-    .post(createOneUser)
+    .post(insertOneUser)
 
 module.exports = router;

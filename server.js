@@ -38,8 +38,9 @@ accessLogStream.on('close', closedLog)
 //console.log(process.env.PASSWORD)
 const database = require('./mongo');
 
-app.use(function(req, res, next) {
-    req.db = database;
+app.use(function (req, res, next) {
+    console.log(`database,connect(): ${database.connect()}`)
+    req.db = database.connect();
     next();
 })
 
