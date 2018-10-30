@@ -13,7 +13,7 @@ const connect = (MongoClient, mongoConnectionString) => {
         return MongoClient.connect(mongoConnectionString, { useNewUrlParser: true }, (err, db) => {
             if (err) return reject(console.log(err))
             const database = db.db('simple-node-backend-app');
-            console.log(`Mongo now listening. Mongo Object: ${database.hasOwnProperty("collection")}`);
+            console.log(`Mongo now listening. Mongo Object: ${database}`);
             // const users = await database.collection('users').find();
             // console.log(users)
             return resolve(database)
@@ -24,10 +24,17 @@ const connect = (MongoClient, mongoConnectionString) => {
 
 
 
-//}
+var callmyPromise = async () => {
+    let result = await (connect(MongoClient, mongoConnectionString))
+    const users = await result.collection('users').find();
+    return users;
+}
 
-const database = connect(MongoClient, mongoConnectionString)
-console.log(database)
+console.log(callmyPromise())
+
+callmyPromise().then(function (result) {
+    console.log(result)
+})
 
 
 
