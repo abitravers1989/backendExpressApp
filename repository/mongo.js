@@ -3,19 +3,22 @@
 // const mongoConnectionString = 'mongodb://localhost/       REMOVE?nodeBackend';
 
 module.exports = {
-    connect: (MongoClient, mongoConnectionString) => {
+    connect: async (MongoClient, mongoConnectionString) => {
         //console.log(process.env.USER_NAME)
         if (!process.env.USER_NAME && !process.env.PASSWORD) {
             throw console.log("Mongo user name and password is not provided.")
         }
-        const client = MongoClient.connect(mongoConnectionString, { useNewUrlParser: true }, (err, db) => {
-            if (err) throw console.log(err);
+        const client = await MongoClient.connect(mongoConnectionString, { useNewUrlParser: true }, (err, db) => {
+            if (err) return reject(console.log(err))
             console.log('Mongo on');
+            //resolve()
             //db.close;
-        })
+        }).catch(() => { });
         const database = client.db('simple-node-backend-app');
+        console.log(`mongo db ${database}`)
         return database;
     }
+
 }
 
 
