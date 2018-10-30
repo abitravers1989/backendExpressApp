@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../index.js');
+const app = require('../server.js');
 
 //
 
@@ -23,12 +23,13 @@ describe('GET /health', () => {
     // })
 })
 
-describe('GET /api/health', () => {
-    it('returns 200 status code', (done) => {
-        request(app)
-            .get('/api/health')
-            .expect(200, done)
-    })
+describe('GET /api/user', () => {
+    TODO: "add test"
+    // it('returns 200 status code', (done) => {
+    //     request(app)
+    //         .get('/api/health')
+    //         .expect(200, done)
+    // })
 })
 
 describe('POST /api/user', () => {

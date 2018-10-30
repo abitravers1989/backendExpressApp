@@ -13,8 +13,9 @@ module.exports = {
         MongoClient.connect(mongoConnectionString, { useNewUrlParser: true }, (err, db) => {
             if (err) throw console.log(err);
             console.log('Mongo on');
-            // db.close;
+            //db.close;
         })
+        return MongoClient.resolve();
     }
 }
 
