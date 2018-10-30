@@ -14,16 +14,22 @@ const connect = (MongoClient, mongoConnectionString) => {
             if (err) return reject(console.log(err))
             const database = db.db('simple-node-backend-app');
             console.log(`Mongo now listening. Mongo Object: ${database.hasOwnProperty("collection")}`);
-            database.collection('users').find()
+            // const users = await database.collection('users').find();
+            // console.log(users)
             return resolve(database)
         })
     })
 }
 
 
+
+
 //}
 
-connect(MongoClient, mongoConnectionString)
+const database = connect(MongoClient, mongoConnectionString)
+console.log(database)
+
+
 
 
 

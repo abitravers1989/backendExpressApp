@@ -27,7 +27,7 @@ const getAll = function (req, res) {
     // console.log(req);
     // res.send(database)
     const users = database.collection('users').find();
-    users.each((err, doc) => {
+    users.forEach((err, doc) => {
         if (err) throw console.log(err);
         res.send(doc)
     })
