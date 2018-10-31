@@ -21,6 +21,8 @@ const connect = (MongoClient, mongoConnectionString) => {
     })
 }
 
+//maybe make the connection emit an event instead then act on that event?
+
 
 
 
@@ -33,6 +35,7 @@ var callmyPromise = async () => {
 console.log(callmyPromise())
 
 callmyPromise().then(function (result) {
+    //close the mongo connection
     console.log(result)
 })
 
