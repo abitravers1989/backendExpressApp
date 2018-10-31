@@ -8,36 +8,40 @@ const connect = (MongoClient, mongoConnectionString) => {
     if (!process.env.USER_NAME && !process.env.PASSWORD) {
         throw console.log("Mongo user name and password is not provided.")
     }
-
-    new Promise((resolve, reject) => {
-        return MongoClient.connect(mongoConnectionString, { useNewUrlParser: true }, (err, db) => {
-            if (err) return reject(console.log(err))
-            const database = db.db('simple-node-backend-app');
-            console.log(`Mongo now listening. Mongo Object: ${database}`);
-            // const users = await database.collection('users').find();
-            // console.log(users)
-            return resolve(database)
+    try {
+        new Promise((resolve, reject) => {
+            MongoClient.connect(mongoConnectionString, { useNewUrlParser: true }, (err, db) => {
+                if (err) return reject(console.log(err))
+                const database = db.db('simple-node-backend-app');
+                console.log(`Mongo now listening. Mongo Object: ${database}`);
+                // const users = await database.collection('users').find();
+                // console.log(users)
+                return resolve(database)
+            })
         })
-    })
+    } catch (e) {
+        return new Error(`issue connecting to mongo: ${e}`)
+    }
+ 
 }
 
 //maybe make the connection emit an event instead then act on that event?
 
 
+connect(MongoClient, mongoConnectionString)
 
+// const callmyPromise = async () => {
+//     let result = await (connect(MongoClient, mongoConnectionString))
+//     const users = await result.collection('users').find();
+//     return users;
+// }
 
-var callmyPromise = async () => {
-    let result = await (connect(MongoClient, mongoConnectionString))
-    const users = await result.collection('users').find();
-    return users;
-}
+// console.log(callmyPromise())
 
-console.log(callmyPromise())
-
-callmyPromise().then(function (result) {
-    //close the mongo connection
-    console.log(result)
-})
+// callmyPromise().then(function (result) {
+//     //close the mongo connection
+//     console.log(result)
+// })
 
 
 
