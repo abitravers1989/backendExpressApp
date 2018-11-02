@@ -20,7 +20,8 @@ const mongDatabase = (MongoClient, mongoConnectionString) => {
     } catch (e) {
         return new Error(`issue connecting to mongo: ${e}`)
     }
-    //return database.collection('users').find();
+    //
+    return database.collection('users').find();
 }
 
 mongDatabase(MongoClient, mongoConnectionString)
@@ -37,18 +38,17 @@ mongDatabase(MongoClient, mongoConnectionString)
 //     }
 //     try {
 //         new Promise((resolve, reject) => {
-        //     MongoClient.connect(mongoConnectionString, { useNewUrlParser: true }, (err, db) => {
-        //         if (err) return reject(console.log(err))
-        //         const database = db.db('simple-node-backend-app');
-        //         console.log(`Mongo now listening. Mongo Object: ${database}`);
-        //         return resolve(database)
-        //     })
-    //     // })
-    // } catch (e) {
-    //     return new Error(`issue connecting to mongo: ${e}`)
-    // }
- 
-// }
+//             MongoClient.connect(mongoConnectionString, { useNewUrlParser: true }, (err, db) => {
+//                 if (err) return reject(console.log(err))
+//                 const database = db.db('simple-node-backend-app');
+//                 console.log(`Mongo now listening. Mongo Object: ${database}`);
+//                 return resolve(database)
+//             })
+//         })
+//     } catch (e) {
+//         return new Error(`issue connecting to mongo: ${e}`)
+//     }
+//  }
 
 // //maybe make the connection emit an event instead then act on that event?
 
