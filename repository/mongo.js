@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb');
-const mongoConnectionString = `mongodb://${process.env.USER_NAME}:${process.env.PASSWORD}@ds135394.mlab.com:35394/simple-node-backend-app`
-// const mongoConnectionString = 'mongodb://localhost/       REMOVE?nodeBackend';
+//const mongoConnectionString = `mongodb://${process.env.USER_NAME}:${process.env.PASSWORD}@ds135394.mlab.com:35394/simple-node-backend-app`
+const mongoConnectionString = 'mongodb://localhost/';
 
 //module.exports = {
 const connect = (MongoClient, mongoConnectionString) => {
@@ -27,8 +27,16 @@ const connect = (MongoClient, mongoConnectionString) => {
 
 //maybe make the connection emit an event instead then act on that event?
 
+const showError = () => {
+    console.log("Error with mongoConnectionPromise")
+}
 
-connect(MongoClient, mongoConnectionString)
+const mongoConnectionPromise = connect(MongoClient, mongoConnectionString)
+mongoConnectionPromise.then((database) => {
+    const users = database.collection('users').find();
+    console.log(users)
+})
+mongoConnectionPromise.catch(showError)
 
 // const callmyPromise = async () => {
 //     let result = await (connect(MongoClient, mongoConnectionString))
