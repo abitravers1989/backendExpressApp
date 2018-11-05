@@ -26,3 +26,12 @@
 
 ## To Run
 ````nodemon server.js````
+
+## Check Local database
+````show dbs````
+````show collections````
+
+
+## Deployment
+https://www.digitalocean.com/community/tutorials/how-to-connect-node-js-to-a-mongodb-database-on-a-vps
+
