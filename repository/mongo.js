@@ -4,15 +4,19 @@ const connect = (MongoClient, mongoConnectionString) => {
     // }
     try {
         // new Promise((resolve, reject) => {
-        MongoClient.connect(mongoConnectionString, { useNewUrlParser: true }, (err, db) => {
+        MongoClient.connect(mongoConnectionString, { useNewUrlParser: true }, function (err, client) {
             if (err) return console.log(err)
             // reject(console.log(err))
-            const database = db.db('nodeBackend');
+            const database = client.db('nodeBackend');
             console.log(`Mongo now listening. Mongo Object: ${database}`);
             const users = database.collection('users').find();
-            //console.log(users)
-            return users
-            return resolve(users)
+            users.forEach((err, doc) => {
+                if (err) throw console.log(err);
+                res.send(doc)
+            })
+            //return users
+            //return resolve(users)
+            client.close()
         })
         // })
     } catch (e) {
@@ -21,7 +25,7 @@ const connect = (MongoClient, mongoConnectionString) => {
 
 }
 
-const { MongoClient } = require('mongodb');
-const mongoConnectionString = 'mongodb://localhost/';
+const MongoClient = require('mongodb').MongoClient;
+const mongoConnectionString = 'mongodb://localhost//';
 //const mongoConnectionString = `mongodb://${process.env.USER_NAME}:${process.env.PASSWORD}@ds135394.mlab.com:35394/simple-node-backend-app`
-console.log(connect(MongoClient, mongoConnectionString))
+connect(MongoClient, mongoConnectionString)

@@ -30,6 +30,7 @@
 ## Check Local database
 ````show dbs````
 ````show collections````
+````db.users.insert({name: "ss", email:"test@test")````
 
 
 ## Deployment
