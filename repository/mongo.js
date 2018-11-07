@@ -10,9 +10,15 @@ const connect = (MongoClient, mongoConnectionString) => {
             const database = client.db('nodeBackend');
 
             const collection = database.collection('users')
-            collection.insertMany([{ name: "test", email: "test@test.com" }, { name: "test2", email: "test2@test2.com" }], (err, result) => {
+            // collection.insertMany([{ name: "test", email: "test@test.com" }, { name: "test2", email: "test2@test2.com" }], (err, result) => {
+            //     if (err) return console.log(err)
+            //     console.log(result.insertedCount
+            // })
+            collection.find().toArray((err, docs) => {
                 if (err) return console.log(err)
-                console.log(result.insertedCount)
+                docs.forEach(element => {
+                    console.log(element.name)
+                })
             })
             client.close()
         })
