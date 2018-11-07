@@ -8,12 +8,15 @@ const connect = (MongoClient, mongoConnectionString) => {
             if (err) return console.log(err)
             // reject(console.log(err))
             const database = client.db('nodeBackend');
-            console.log(`Mongo now listening. Mongo Object: ${database}`);
+
             const users = database.collection('users').find();
+            console.log(database.collection('users').find().toArray())
             users.forEach((err, doc) => {
                 if (err) throw console.log(err);
-                res.send(doc)
+                // res.send(doc)
+                console.log(doc)
             })
+            console.log(`Mongo now listening. Mongo Object: ${database}`);
             //return users
             //return resolve(users)
             client.close()
