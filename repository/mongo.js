@@ -3,26 +3,26 @@ const connect = (MongoClient, mongoConnectionString) => {
     //     throw console.log("Mongo user name and password is not provided.")
     // }
     try {
-        // new Promise((resolve, reject) => {
-        MongoClient.connect(mongoConnectionString, { useNewUrlParser: true }, function (err, client) {
-            if (err) return console.log(err)
-            // reject(console.log(err))
-            const database = client.db('nodeBackend');
+        new Promise((resolve, reject) => {
+            MongoClient.connect(mongoConnectionString, { useNewUrlParser: true }, function (err, client) {
+                if (err) reject(console.log(err))
+                //return console.log(err)
+                const database = client.db('nodeBackend');
 
-            const collection = database.collection('users')
-            // collection.insertMany([{ name: "test", email: "test@test.com" }, { name: "test2", email: "test2@test2.com" }], (err, result) => {
-            //     if (err) return console.log(err)
-            //     console.log(result.insertedCount
-            // })
-            collection.find().toArray((err, docs) => {
-                if (err) return console.log(err)
-                docs.forEach(element => {
-                    console.log(element.name)
+                const collection = database.collection('users')
+                // collection.insertMany([{ name: "test", email: "test@test.com" }, { name: "test2", email: "test2@test2.com" }], (err, result) => {
+                //     if (err) return console.log(err)
+                //     console.log(result.insertedCount
+                // })
+                collection.find().toArray((err, docs) => {
+                    if (err) return console.log(err)
+                    docs.forEach(element => {
+                        resolve(console.log(element.name))
+                    })
                 })
+                client.close()
             })
-            client.close()
         })
-        // })
     } catch (e) {
         return new Error(`issue connecting to mongo: ${e}`)
     }
