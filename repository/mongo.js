@@ -9,16 +9,11 @@ const connect = (MongoClient, mongoConnectionString) => {
             // reject(console.log(err))
             const database = client.db('nodeBackend');
 
-            const users = database.collection('users').find();
-            console.log(database.collection('users').find().toArray())
-            users.forEach((err, doc) => {
-                if (err) throw console.log(err);
-                // res.send(doc)
-                console.log(doc)
+            const collection = database.collection('users')
+            collection.insertMany([{ name: "test", email: "test@test.com" }, { name: "test2", email: "test2@test2.com" }], (err, result) => {
+                if (err) return console.log(err)
+                console.log(result.insertedCount)
             })
-            console.log(`Mongo now listening. Mongo Object: ${database}`);
-            //return users
-            //return resolve(users)
             client.close()
         })
         // })
