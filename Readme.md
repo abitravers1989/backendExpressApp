@@ -36,3 +36,14 @@
 ## Deployment
 https://www.digitalocean.com/community/tutorials/how-to-connect-node-js-to-a-mongodb-database-on-a-vps
 
+
+## Structure 
+
+Server.js file which does start and stop
+Mongo connection file which does the start and stop of that.
+Index.js file which controls the starting and stopping of them both. 
+
+store.js is db in meerkat 
+
+brings up a server then asigns it to memory then RETURNS it.
+Key to return it so can communicate with it.
