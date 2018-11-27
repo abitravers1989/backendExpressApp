@@ -51,7 +51,7 @@ app.use(function (req, res, next) {
 
 app.listen(3000, function () {
     app.emit('listened', null)
-}) //console.log('working'))
+}) 
 
 app.on('listened', function () {
     console.log(`listening on port 3000`)
